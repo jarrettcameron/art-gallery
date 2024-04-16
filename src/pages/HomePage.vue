@@ -1,14 +1,52 @@
-<script setup></script>
+<script setup>
+import { computed, onMounted } from 'vue';
+import { AppState } from '../AppState.js';
+import { artService } from '../services/ArtService.js';
+import Pop from '../utils/Pop.js';
+
+
+const artWork = computed(() => AppState.art)
+
+async function getArtWork() {
+  try {
+    await artService.getArt()
+  }
+  catch (error){
+    Pop.error(error);
+  }
+}
+
+onMounted(() => {
+  getArtWork()
+})
+
+</script>
 
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="home-card p-5 card align-items-center shadow rounded elevation-3">
-      <img src="https://bcw.blob.core.windows.net/public/img/8600856373152463" alt="CodeWorks Logo"
-        class="rounded-circle">
-      <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-        Vue 3 Starter
-      </h1>
-    </div>
+  <div class="container">
+    <section class="my-3 mt-5 row justify-content-center">
+      <div class="col-12 text-center serif">
+        <h3>Browse Collection</h3>
+      </div>
+    </section>
+    <section class="row justify-content-center px-5">
+      <ArtworkCard v-for="art in artWork" :key="art.id" :art="art"/>
+    </section>
+    <section class="row justify-content-center my-3">
+      <div class="col-lg-6 col-11">
+        <div class="row text-center serif align-items-center">
+          <div class="col">
+            <button :disabled="AppState.currentPage == 1" class="btn" @click="artService.changePage(AppState.currentPage - 1)">Previous Page</button>
+          </div>
+          <div class="col">
+            Page {{ AppState.currentPage }} of {{ AppState.totalPages }}
+          </div>
+          <div class="col">
+            <button :disabled="AppState.currentPage == AppState.totalPages" class="btn" @click="artService.changePage(AppState.currentPage + 1)">Next Page</button>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 

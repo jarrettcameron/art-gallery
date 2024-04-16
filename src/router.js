@@ -12,6 +12,11 @@ const routes = [
     component: loadPage('HomePage')
   },
   {
+    path: '/art/:artId',
+    name: 'Art Viewer',
+    component: loadPage('ArtViewerPage')
+  },
+  {
     path: '/about',
     name: 'About',
     component: loadPage('AboutPage')
