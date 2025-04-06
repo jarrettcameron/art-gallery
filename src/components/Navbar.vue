@@ -22,7 +22,7 @@ function toggleTheme() {
     <nav class="mt-2 mt-lg-0 navbar navbar-expand-sm px-3">
       <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
         <div class="d-flex flex-column align-items-center">
-          <h3 class="serif">CODEWORKS GALLERY</h3>
+          <h3 class="serif">ART GALLERY</h3>
         </div>
       </router-link>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"

@@ -29,7 +29,7 @@ onMounted(() => {
         <h3>Browse Collection</h3>
       </div>
     </section>
-    <section class="row px-5">
+    <section class="row px-5 justify-content-lg-center justify-content-start">
       <ArtworkCard v-for="art in artWork" :key="art.id" :art="art"/>
     </section>
     <section class="row justify-content-center my-3">
